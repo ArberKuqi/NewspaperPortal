@@ -1,12 +1,10 @@
 <script setup>
-import NewsCard from '../components/news/NewsCard.vue'
-import NewsList from '../components/news/NewList.vue'
 import Footer from '../components/layout/Footer.vue'
+import { reactive, computed } from 'vue'
+import { useSearchStore } from '@/stores/searchStore'
+import NewsCard from '@/components/news/NewsCard.vue'
 
-import {reactive, computed, ref} from 'vue'
-import {useSearchStore} from "@/stores/searchStore.js";
-
-const searchStore = useSearchStore()
+const { searchQuery } = useSearchStore()
 
 const allNews = reactive([
   {
@@ -19,110 +17,76 @@ const allNews = reactive([
   {
     id: '2',
     title: 'Festival kulturor në Prishtinë',
-    summary: 'Një festival i mbushur me muzikë, art dhe traditë.',
-    image: 'https://picsum.photos/400/200?random=10',
+    summary: 'Një festival i mbushur me muzikë dhe traditë.',
+    image: 'https://picsum.photos/400/200?random=2',
     category: 'kulture'
   },
   {
     id: '3',
-    title: 'Lajmet më të fundit nga bota',
-    summary: 'Konfliktet globale, diplomacia dhe politika.',
-    image: 'https://picsum.photos/400/200?random=15',
+    title: 'Lajme ndërkombëtare nga Evropa',
+    summary: 'Zhvillime të fundit nga politika botërore.',
+    image: 'https://picsum.photos/400/200?random=3',
     category: 'bota'
   },
   {
     id: '4',
-    title: 'Zhvillimet teknologjike 2025',
-    summary: 'AI, robotikë dhe inovacion.',
-    image: 'https://picsum.photos/400/200?random=17',
+    title: 'Zhvillimet në teknologji për vitin 2025',
+    summary: 'AI, robotikë dhe inovacione të reja.',
+    image: 'https://picsum.photos/400/200?random=4',
     category: 'technology'
   }
 ])
 
 const filteredNews = computed(() => {
-  if (!searchStore.searchQuery) return []
+  if (!searchQuery) return []
   return allNews.filter(news =>
-      news.title.toLowerCase().includes(searchStore.searchQuery.toLowerCase()) ||
-      news.summary.toLowerCase().includes(searchStore.searchQuery.toLowerCase())
+      news.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      news.summary.toLowerCase().includes(searchQuery.toLowerCase())
   )
 })
 
-const sportNews = computed(() =>
-    allNews.filter(news => news.category === 'sport')
-)
-
-const kultureNews = computed(() =>
-    allNews.filter(news => news.category === 'kulture')
-)
+const sportNews = computed(() => allNews.filter(n => n.category === 'sport'))
+const kultureNews = computed(() => allNews.filter(n => n.category === 'kulture'))
 </script>
 
 <template>
   <div class="container py-4">
-    <div v-if="searchStore.searchQuery">
+    <!-- Kërkimi -->
+    <div v-if="searchQuery">
+      <h4>Rezultatet për "{{ searchQuery }}"</h4>
       <div class="row">
         <div v-for="news in filteredNews" :key="news.id" class="col-md-4 mb-4">
           <NewsCard :news="news" />
         </div>
         <div v-if="filteredNews.length === 0" class="alert alert-warning text-center">
-          Nuk u gjete asnje lajm.
+          Nuk u gjet asnje lajm.
         </div>
       </div>
     </div>
 
-    <!-- Nëse nuk ka kërkim, shfaq normalisht -->
+    <!-- Lajmet e rregullta -->
     <div v-else>
       <!-- Lajmet Kryesore -->
-      <h4 class="mb-3 d-flex justify-content-between align-items-center">
-        📰 Lajmet Kryesore
-        <router-link to="/news" class="btn btn-sm btn-outline-primary">Shiko të gjitha</router-link>
-      </h4>
-      <div class="row justify-content-start">
-        <div
-            class="col-md-4 mb-4"
-            v-for="news in allNews.slice(0, 3)"
-            :key="news.id"
-        >
+      <h4 class="mb-3">Lajmet Kryesore</h4>
+      <div class="row">
+        <div v-for="news in allNews.slice(0, 3)" :key="news.id" class="col-md-4 mb-4">
           <NewsCard :news="news" />
         </div>
       </div>
 
       <!-- Sport -->
-      <div v-if="sportNews && sportNews.length > 0">
-        <h4 class="mt-5 mb-3 d-flex justify-content-between align-items-center">
-          🏟 Sport
-          <router-link to="/sport" class="btn btn-sm btn-outline-primary">Shiko më shumë</router-link>
-        </h4>
-        <div
-            class="row"
-            :class="sportNews.length === 1 ? 'justify-content-center' : 'justify-content-start'"
-        >
-          <div
-              class="col-md-4 mb-4"
-              v-for="news in sportNews.slice(0, 2)"
-              :key="news.id"
-          >
-            <NewsCard :news="news" />
-          </div>
+      <h4 class="mt-5 mb-3">Sport</h4>
+      <div class="row">
+        <div v-for="news in sportNews" :key="news.id" class="col-md-4 mb-4">
+          <NewsCard :news="news" />
         </div>
       </div>
 
       <!-- Kulturë -->
-      <div v-if="kultureNews && kultureNews.length > 0">
-        <h4 class="mt-5 mb-3 d-flex justify-content-between align-items-center">
-          Kultura
-          <router-link to="/kultura" class="btn btn-sm btn-outline-primary">Shiko me shume</router-link>
-        </h4>
-        <div
-            class="row"
-            :class="kultureNews.length === 1 ? 'justify-content-center' : 'justify-content-start'"
-        >
-          <div
-              class="col-md-4 mb-4"
-              v-for="news in kultureNews.slice(0, 2)"
-              :key="news.id"
-          >
-            <NewsCard :news="news" />
-          </div>
+      <h4 class="mt-5 mb-3">Kultura</h4>
+      <div class="row">
+        <div v-for="news in kultureNews" :key="news.id" class="col-md-4 mb-4">
+          <NewsCard :news="news" />
         </div>
       </div>
     </div>

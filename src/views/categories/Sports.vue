@@ -43,17 +43,16 @@ const sportNews = [
 
 <template>
   <div class="container py-4">
-    <h2 class="mb-4">🏆 Lajmet Sportive</h2>
+    <h2 class="mb-4"> Sport</h2>
     <div class="row">
       <NewsCard
-          v-for="(news, index) in sportNews"
-          :key="index"
+          v-for="news in sportNews"
+          :key="news.id"
           :news="news"
           class="col-md-4 mb-4"
       />
     </div>
   </div>
-
 </template>
 
 <style scoped>

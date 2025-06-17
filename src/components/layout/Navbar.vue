@@ -2,17 +2,20 @@
 import { useRouter } from 'vue-router'
 import { useSearchStore } from '@/stores/searchStore'
 
-
-const searchStore = useSearchStore()
-
-
-
+const router = useRouter()
+const store = useSearchStore()
+const onSearch = () => {
+  if (store.searchQuery.trim()) {
+    router.push('/')
+  }
+}
 const links = [
   { name: 'Home', path: '/' },
   { name: 'Sports', path: '/sport' },
   { name: 'Technology', path: '/technology' },
   { name: 'Bota', path: '/bota' },
-  { name: 'Kultura', path: '/kultura' } ] </script>
+  { name: 'Kultura', path: '/kultura' } ]
+</script>
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
     <div class="container-fluid">
@@ -31,16 +34,15 @@ const links = [
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"><router-link class="nav-link" to="/">Home</router-link></li>
           <li class="nav-item"><router-link class="nav-link" to="/sport">Sport</router-link></li>
-          <li class="nav-item"><router-link class="nav-link" to="/kultura">Kultura</router-link></li>
           <li class="nav-item"><router-link class="nav-link" to="/technology">Technology</router-link></li>
           <li class="nav-item"><router-link class="nav-link" to="/bota">Bota</router-link></li>
-          <li class="nav-item"><router-link to="/news" class="nav-link">Gjitha lajmet</router-link></li>
+          <li class="nav-item"><router-link class="nav-link" to="/kultura">Kultura</router-link></li>
         </ul>
 
-        <!-- Search -->
-        <form class="d-flex" @submit.prevent="router.push('/')">
+        <!-- Kërkimi -->
+        <form class="d-flex" @submit.prevent="onSearch">
           <input
-              v-model="searchStore.searchQuery"
+              v-model="store.searchQuery"
               class="form-control me-2"
               type="search"
               placeholder="Kërko..."

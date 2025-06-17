@@ -7,7 +7,7 @@ const query = ref('')
 const allNews = [
   {
     id: '1',
-    title: 'Kampionati Evropian 2024 nis me spektakël',
+    title: 'Kampionati Evropian 2024 nis me spektakel',
     summary: 'Gjermania hap turneun me një fitore ndaj Skocisë.',
     image: 'https://picsum.photos/400/200?random=1'
   },
@@ -40,13 +40,13 @@ const filteredNews = computed(() =>
 
 <template>
   <div class="container py-4">
-    <h2 class="mb-4">📰 Të gjitha Lajmet</h2>
+    <h2 class="mb-4">📰 Te gjitha Lajmet</h2>
 
     <input
         v-model="query"
         type="text"
         class="form-control mb-4"
-        placeholder="Kërko..."
+        placeholder="Kerko..."
     />
 
     <div class="row">
@@ -58,7 +58,7 @@ const filteredNews = computed(() =>
         <NewsCard :news="news" />
       </div>
       <div v-if="filteredNews.length === 0" class="alert alert-warning text-center">
-        ❗ Nuk u gjet asnjë lajm
+        Nuk u gjet asnj lajm
       </div>
     </div>
   </div>

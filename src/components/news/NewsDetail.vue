@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const news = ref({})
+const newsId = route.params.id
 
 onMounted(() => {
   const dummyNews = [
@@ -58,10 +59,15 @@ onMounted(() => {
 
 <template>
   <div class="container py-4">
-    <h2 class="mb-3">{{ news.title }}</h2>
-    <img :src="news.image" class="img-fluid mb-3" alt="Lajmi" />
-    <p class="lead">{{ news.summary }}</p>
-    <p>{{ news.content }}</p>
+    <div v-if="news">
+      <h2>{{ news.title }}</h2>
+      <img :src="news.image" class="img-fluid mb-3" alt="news image">
+      <p>{{ news.summary }}</p>
+      <router-link to="/" class="btn btn-outline-secondary mt-3"> Kthehu te lajmet</router-link>
+    </div>
+    <div v-else class="alert alert-danger text-center">
+      Lajmi nuk u gjet.
+    </div>
   </div>
 </template>
 
