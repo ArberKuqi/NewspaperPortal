@@ -45,14 +45,6 @@ const sportNews = computed(() =>
 const kultureNews = computed(() =>
     allNews.filter(news => news.category === 'kulture')
 )
-
-const filteredNews = computed(() => {
-  if (!searchQuery) return allNews
-  return allNews.filter(news =>
-      news.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      news.summary.toLowerCase().includes(searchQuery.toLowerCase())
-  )
-})
 </script>
 
 <template>
@@ -69,13 +61,9 @@ const filteredNews = computed(() => {
 
     <!-- Rezultatet nga kërkimi -->
     <div v-if="searchQuery">
-      <h4 class="mb-3">📰 Rezultatet për "{{ searchQuery }}"</h4>
+      <h4 class="mb-3">Rezultatet për "{{ searchQuery }}"</h4>
       <div class="row">
-        <div
-            class="col-md-4 mb-4"
-            v-for="news in filteredNews"
-            :key="news.id"
-        >
+        <div class="col-md-4 mb-4" v-for="news in filteredNews" :key="news.id">
           <NewsCard :news="news" />
         </div>
         <div v-if="filteredNews.length === 0" class="alert alert-warning text-center w-100">

@@ -6,6 +6,7 @@ import Sport from '../views/categories/Sports.vue'
 import Technology from '../views/categories/Technology.vue'
 import NotFound from '../views/NotFound.vue'
 import Bota from "@/views/categories/Bota.vue";
+import NewList  from "@/components/news/NewList.vue";
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -13,6 +14,7 @@ const routes = [
     { path: '/technology', name: 'Technology', component: Technology },
     { path: '/bota', name: 'Bota', component: Bota },
     { path: '/kultura', name: 'Kultura', component: () => import('../views/categories/Kultura.vue') },
+    { path: '/new', name: 'NewList', component: () => import('../components/news/NewList.vue') },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
     { path: '/news/:id', name: 'NewsDetail', component: () => import('../components/news/NewsDetail.vue') }
 ]
