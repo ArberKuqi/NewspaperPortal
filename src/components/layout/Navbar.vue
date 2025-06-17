@@ -1,6 +1,8 @@
 <script setup>
-
+import { useRouter } from 'vue-router'
 import { useSearchStore } from '@/stores/searchStore'
+
+
 const searchStore = useSearchStore()
 
 
@@ -35,15 +37,15 @@ const links = [
           <li class="nav-item"><router-link to="/news" class="nav-link">Gjitha lajmet</router-link></li>
         </ul>
 
-        <!-- Kërkimi -->
-        <form class="d-flex" @submit.prevent="onSearch">
+        <!-- Search -->
+        <form class="d-flex" @submit.prevent="router.push('/')">
           <input
               v-model="searchStore.searchQuery"
               class="form-control me-2"
               type="search"
               placeholder="Kërko..."
           />
-          <button class="btn btn-outline-light" type="submit">Kerko</button>
+          <button class="btn btn-outline-light" type="submit">Kërko</button>
         </form>
       </div>
     </div>

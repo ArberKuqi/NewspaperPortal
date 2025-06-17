@@ -10,7 +10,7 @@ const sportNews = [
   },
   {
     id: '2',
-    title: 'Kosova barazon ndaj Suedisë',
+    title: 'Kosova barazon ndaj Suedise',
     summary: 'Një ndeshje e fortë dhe emocionuese.',
     image: 'https://picsum.photos/400/200?random=8',
   },

@@ -29,6 +29,34 @@ const allNews = reactive([
     summary: 'Panairi i teknologjisë solli robotë inteligjentë dhe pajisje të reja.',
     category: 'teknologji',
     image: 'https://picsum.photos/400/200?random=13'
+  },
+  {
+    id: '5',
+    title: 'Koncert klasik në Teatrin Kombëtar',
+    summary: 'Një mbrëmje magjike me muzikë klasike nga artistë vendorë dhe ndërkombëtarë.',
+    category: 'kulture',
+    image: 'https://picsum.photos/400/200?random=14'
+  },
+  {
+    id: '6',
+    title: 'Panairi i librit në qytetin e vjetër',
+    summary: 'Autorë dhe lexues takohen për të festuar literaturën dhe kulturën.',
+    category: 'kulture',
+    image: 'https://picsum.photos/400/200?random=15'
+  },
+  {
+    id: '7',
+    title: 'Panairi i librit në qytetin e vjetër',
+    summary: 'Autorë dhe lexues takohen për të festuar literaturën dhe kulturën.',
+    category: 'kulture',
+    image: 'https://picsum.photos/400/200?random=15'
+  },
+  {
+    id: '8',
+    title: 'Panairi i librit në qytetin e vjetër',
+    summary: 'Autorë dhe lexues takohen për të festuar literaturën dhe kulturën.',
+    category: 'kulture',
+    image: 'https://picsum.photos/400/200?random=15'
   }
 ])
 

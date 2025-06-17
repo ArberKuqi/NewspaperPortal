@@ -1,11 +1,12 @@
 <script setup>
 import NewsCard from '../components/news/NewsCard.vue'
 import NewsList from '../components/news/NewList.vue'
+import Footer from '../components/layout/Footer.vue'
 
 import {reactive, computed, ref} from 'vue'
 import {useSearchStore} from "@/stores/searchStore.js";
 
-const { searchQuery } = useSearchStore()
+const searchStore = useSearchStore()
 
 const allNews = reactive([
   {
@@ -24,19 +25,27 @@ const allNews = reactive([
   },
   {
     id: '3',
-    title: 'Ekspozitë arti në Gjakovë',
-    summary: 'Artistë vendorë prezantojnë punimet e tyre.',
-    image: 'https://picsum.photos/400/200?random=12',
-    category: 'kulture'
+    title: 'Lajmet më të fundit nga bota',
+    summary: 'Konfliktet globale, diplomacia dhe politika.',
+    image: 'https://picsum.photos/400/200?random=15',
+    category: 'bota'
   },
   {
     id: '4',
-    title: 'Kosova barazon ndaj Suedisë',
-    summary: 'Një ndeshje e fortë dhe emocionuese.',
-    image: 'https://picsum.photos/400/200?random=8',
-    category: 'sport'
+    title: 'Zhvillimet teknologjike 2025',
+    summary: 'AI, robotikë dhe inovacion.',
+    image: 'https://picsum.photos/400/200?random=17',
+    category: 'technology'
   }
 ])
+
+const filteredNews = computed(() => {
+  if (!searchStore.searchQuery) return []
+  return allNews.filter(news =>
+      news.title.toLowerCase().includes(searchStore.searchQuery.toLowerCase()) ||
+      news.summary.toLowerCase().includes(searchStore.searchQuery.toLowerCase())
+  )
+})
 
 const sportNews = computed(() =>
     allNews.filter(news => news.category === 'sport')
@@ -49,25 +58,13 @@ const kultureNews = computed(() =>
 
 <template>
   <div class="container py-4">
-    <!-- Kërkimi -->
-    <div class="mb-5">
-      <input
-          v-model="searchQuery"
-          class="form-control"
-          type="text"
-          placeholder="🔍 Kërko lajm..."
-      />
-    </div>
-
-    <!-- Rezultatet nga kërkimi -->
-    <div v-if="searchQuery">
-      <h4 class="mb-3">Rezultatet për "{{ searchQuery }}"</h4>
+    <div v-if="searchStore.searchQuery">
       <div class="row">
-        <div class="col-md-4 mb-4" v-for="news in filteredNews" :key="news.id">
+        <div v-for="news in filteredNews" :key="news.id" class="col-md-4 mb-4">
           <NewsCard :news="news" />
         </div>
-        <div v-if="filteredNews.length === 0" class="alert alert-warning text-center w-100">
-          ❗ Nuk u gjet asnjë lajm për “{{ searchQuery }}”
+        <div v-if="filteredNews.length === 0" class="alert alert-warning text-center">
+          Nuk u gjete asnje lajm.
         </div>
       </div>
     </div>
@@ -112,8 +109,8 @@ const kultureNews = computed(() =>
       <!-- Kulturë -->
       <div v-if="kultureNews && kultureNews.length > 0">
         <h4 class="mt-5 mb-3 d-flex justify-content-between align-items-center">
-          🎭 Kulturë
-          <router-link to="/kultura" class="btn btn-sm btn-outline-primary">Shiko më shumë</router-link>
+          Kultura
+          <router-link to="/kultura" class="btn btn-sm btn-outline-primary">Shiko me shume</router-link>
         </h4>
         <div
             class="row"

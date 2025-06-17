@@ -9,6 +9,7 @@ defineProps(['news'])
       <div class="card-body">
         <h5 class="card-title">{{ news.title }}</h5>
         <p class="card-text">{{ news.summary }}</p>
+
       </div>
     </div>
   </router-link>

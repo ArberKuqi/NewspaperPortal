@@ -16,11 +16,35 @@ onMounted(() => {
     },
     {
       id: '2',
-      title: 'Rritet çmimi i naftës në tregjet botërore',
-      summary: 'Analistët presin ndikim të ndjeshëm në ekonomitë e Ballkanit.',
-      content: 'Çmimet e naftës po rriten për shkak të krizave globale...',
-      image: 'https://picsum.photos/600/300?random=2',
+      title: 'Kosova barazon ndaj Suedise',
+      summary: 'Një ndeshje e fortë dhe emocionuese.',
+      image: 'https://picsum.photos/400/200?random=8',
+    },
+    {
+      id: '3',
+      title: 'Zhvillimet e fundit në teknologji për vitin 2025',
+      summary: 'AI, robotika dhe realiteti virtual do të dominojnë tregun.',
+      image: 'https://picsum.photos/400/200?random=3',
+    },
+    {
+      id: '4',
+      title: 'Lajmi 4',
+      summary: 'AI, robotika dhe realiteti virtual do të dominojnë tregun.',
+      image: 'https://picsum.photos/400/200?random=3',
+    },
+    {
+      id: '5',
+      title: 'Lajmi 5',
+      summary: 'AI, robotika dhe realiteti virtual do të dominojnë tregun.',
+      image: 'https://picsum.photos/400/200?random=3',
+    },
+    {
+      id: '6',
+      title: 'Lajmi 6',
+      summary: 'AI, robotika dhe realiteti virtual do të dominojnë tregun.',
+      image: 'https://picsum.photos/400/200?random=3',
     }
+
   ]
 
   news.value = dummyNews.find(n => n.id === route.params.id) || {
